@@ -1,0 +1,38 @@
+CREATE TABLE students
+(
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+passport_number INTEGER  NOT NULL,
+passport_serial INTEGER  NOT NULL
+);
+CREATE TABLE subjects
+(
+id SERIAL PRIMARY KEY,
+subject TEXT NOT NULL UNIQUE
+);
+CEATE TABLE progress
+(
+id SERIAL PRIMARY KEY,
+student INTEGER,
+subject INTEGER,
+FOREIGN KEY (student) REFERENCES students (id) ON DELETE CASCADE,
+FOREIGN KEY (subjects) REFERENCES subjects (id) ON DELETE CASCADE,
+score INTEGER CHECK (score <=5 AND score >=2)
+);
+SELECT students.name,subject,progress.score
+FROM students
+JOIN progress ON progress.student = student.id
+JOIN subject ON subject.id = progress.subject
+WHERE progress.score >=3
+AND subjects.subject = "math";
+
+select AVG (score) FROM progress
+JOIN subjects ON subjects.id = progress.subject AND subjects.subject = "math";
+
+SELECT AVG(score) FROM progress
+JOIN subjects ON subjects.id = progress.subject
+JOIN students ON students.id = progress.student AND student.name = "петя";
+
+SELECT subjects.subject FROM subjects
+JOIN progress ON progress.subject = subjects.id AND score >= 3
+GROUP  BY subjects.subject LIMIT 3;
