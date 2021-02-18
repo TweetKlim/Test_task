@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS Items CASCADE ;
+CREATE TABLE items
+(
+  id serial NOT NULL PRIMARY KEY ,
+  val int,
+);
+INSERT  INTO items(val) VALUES
+(0),(0),(0),(0),(0),(0),(0),(0),(0),(0),
+(0),(0),(0),(0),(0),(0),(0),(0),(0),(0),
+(0),(0),(0),(0),(0),(0),(0),(0),(0),(0),
+(0),(0),(0),(0),(0),(0),(0),(0),(0),(0);
